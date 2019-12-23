@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
+Route::get('/p/create', 'PostsController@create'); //Get route to access the create post form
+Route::post('/p', 'PostsController@store'); //Get route to access the create post form
