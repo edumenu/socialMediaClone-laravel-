@@ -36,8 +36,8 @@ class PostsController extends Controller
 
         $imagePath = request('image')->store('uploads', 'public');
 
-        //$image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
-        //$image->save();
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200); //Image intervention resizes the image
+        $image->save();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
@@ -47,8 +47,8 @@ class PostsController extends Controller
         return redirect('/profile/' . auth()->user()->id);  //Grabbing the auth user and redering to the profile page.
     }
 
-    // public function show(\App\Post $post)
-    // {
-    //     return view('posts.show', compact('post'));
-    // }
+    public function show(\App\Post $post) //Laravel fetching our Post automatically by using \App\Post
+    {
+        return view('posts.show', compact('post'));    //
+    }
 }
