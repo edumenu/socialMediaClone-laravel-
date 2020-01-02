@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Mail\NewUserWelcomeMail;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,12 +22,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/email', function () {
+    return new NewUserWelcomeMail();
+});
+
 Route::post('follow/{user}', 'FollowsController@store');
 
-Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show'); //Get request to display a user's profile
+Route::get('/projects/socialMediaClone/public/profile/{user}', 'ProfilesController@index')->name('profile.show'); //Get request to display a user's profile
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit'); //Get request for displaying editing profile page
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');  //Patch request to edit profile
 
+Route::get('/', 'PostsController@index');
 Route::get('/p/create', 'PostsController@create'); //Get route to access the create post form
 Route::post('/p', 'PostsController@store'); //Get route to access the create post form
 Route::get('/p/{post}', 'PostsController@show'); //Get route to access the create post form

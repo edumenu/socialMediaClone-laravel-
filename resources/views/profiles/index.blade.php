@@ -4,7 +4,6 @@
 <div class="container">
     <div class="row">
         <div class="col-3 p-5">
-            <!-- <img src="https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947_960_720.jpg" class="rounded-circle w-100"> -->
             <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-100">
         </div>
         <div class="col-9 pt-5">
@@ -17,20 +16,21 @@
                     </div>
 
                     @can('update', $user->profile)   <!-- Display edit profile button for only users -->
-                        <a href="/p/create">Add new post</a>
+                        <a class="btn btn-success" href="/p/create">Add new post</a>
                     @endcan
 
             </div>
 
             @can('update', $user->profile)   <!-- Display edit profile button for only users -->
-                <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
+                <a class="btn btn-info" href="/profile/{{ $user->id }}/edit">Edit Profile</a>
             @endcan
 
             <div class="d-flex">
-                <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
-                <div class="pr-5"><strong>{{ $user->profile->followers->count()}}</strong> followers</div>
-                <div class="pr-5"><strong>50k</strong> following</div>
+                <div class="pr-5"><strong>{{ $postCount }}</strong> posts</div>
+                <div class="pr-5"><strong>{{ $followersCount }}</strong> followers</div>
+                <div class="pr-5"><strong>{{ $followingCount }}</strong> following</div>
             </div>
+
             <div class="pt-4 font-weight-bold">{{ $user->profile->title}}</div>
             <div>{{ $user->profile->description}}</div>
             <div><a href="#">{{ $user->profile->url}}</a></div>
